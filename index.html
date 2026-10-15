@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f6fb">
+  <title>Khách hàng · InvoicePilot</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="InvoicePilot - Khách hàng"><span class="brand-mark">IP</span><span>InvoicePilot</span></a>
+      <span class="page-tag">QUẢN LÝ KHÁCH HÀNG</span>
+    </header>
+
+    <section class="intro">
+      <div><p class="eyebrow">KHÁCH HÀNG</p><h1>Danh sách khách hàng</h1><p class="intro-copy">Quản lý thông tin liên hệ và theo dõi công nợ của khách hàng.</p></div>
+      <button class="button button-primary" id="add-customer" type="button"><span aria-hidden="true">＋</span> Thêm khách hàng</button>
+    </section>
+
+    <section class="stats" aria-label="Tổng quan khách hàng">
+      <article class="stat-card"><span class="stat-icon blue">♙</span><div><p>Tổng khách hàng</p><strong id="total-count">0</strong></div></article>
+      <article class="stat-card"><span class="stat-icon green">✓</span><div><p>Đang hoạt động</p><strong id="active-count">0</strong></div></article>
+      <article class="stat-card"><span class="stat-icon amber">₫</span><div><p>Tổng công nợ</p><strong id="total-debt">0 ₫</strong></div></article>
+    </section>
+
+    <section class="panel">
+      <div class="panel-heading"><div><h2>Khách hàng</h2><p>Danh sách được lưu trên trình duyệt của thiết bị này.</p></div><div class="list-tools"><label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Tìm tên, email, mã số thuế…" aria-label="Tìm khách hàng"></label><label class="filter-label"><span class="sr-only">Lọc trạng thái</span><select id="status-filter" aria-label="Lọc theo trạng thái"><option value="all">Tất cả trạng thái</option><option>Đang hoạt động</option><option>Cần theo dõi</option><option>Ngừng hợp tác</option></select></label></div></div>
+      <div class="table-wrap"><table><thead><tr><th>Khách hàng</th><th>Người liên hệ</th><th>Email</th><th>Số điện thoại</th><th>Công nợ</th><th>Trạng thái</th><th><span class="sr-only">Thao tác</span></th></tr></thead><tbody id="customer-rows"></tbody></table></div>
+      <div class="empty-state" id="empty-state" hidden><span class="empty-icon">♙</span><strong>Chưa có khách hàng</strong><p>Thêm khách hàng đầu tiên để bắt đầu quản lý.</p><button class="button button-secondary" type="button" id="empty-add">Thêm khách hàng</button></div>
+      <footer class="panel-footer"><span id="result-count">0 khách hàng</span><span>Dữ liệu mẫu có thể chỉnh sửa hoặc xóa</span></footer>
+    </section>
+    <p class="notice" id="notice" role="status" aria-live="polite"></p>
+  </main>
+
+  <dialog id="customer-dialog" aria-labelledby="dialog-title">
+    <form id="customer-form">
+      <header class="dialog-heading"><div><p class="eyebrow">THÔNG TIN KHÁCH HÀNG</p><h2 id="dialog-title">Thêm khách hàng</h2></div><button class="icon-button" id="close-dialog" type="button" aria-label="Đóng">×</button></header>
+      <input id="customer-id" type="hidden">
+      <div class="form-grid">
+        <label class="field field-wide">Tên khách hàng *<input name="name" required maxlength="100" placeholder="Ví dụ: Công ty Ánh Dương"></label>
+        <label class="field">Người liên hệ<input name="contact" maxlength="80" placeholder="Nguyễn Minh An"></label>
+        <label class="field">Email<input name="email" type="email" maxlength="120" placeholder="email@congty.vn"></label>
+        <label class="field">Số điện thoại<input name="phone" type="tel" maxlength="20" placeholder="0901 234 567"></label>
+        <label class="field">Mã số thuế<input name="tax" maxlength="30" placeholder="0312345678"></label>
+        <label class="field">Công nợ (₫)<input name="debt" inputmode="numeric" placeholder="0" value="0"></label>
+        <label class="field">Trạng thái<select name="status"><option value="Đang hoạt động">Đang hoạt động</option><option value="Cần theo dõi">Cần theo dõi</option><option value="Ngừng hợp tác">Ngừng hợp tác</option></select></label>
+        <label class="field field-wide">Địa chỉ<input name="address" maxlength="180" placeholder="Địa chỉ doanh nghiệp"></label>
+      </div>
+      <p class="form-error" id="form-error" role="alert"></p>
+      <footer class="dialog-actions"><button class="button button-secondary" id="cancel-dialog" type="button">Hủy</button><button class="button button-primary" type="submit">Lưu khách hàng</button></footer>
+    </form>
+  </dialog>
+</body>
+</html>
